@@ -107,7 +107,7 @@ public class Main extends JFrame {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		final Main m = new Main();
+		new Main();
 	}
 
 	private static class Dictionary {
@@ -160,6 +160,16 @@ public class Main extends JFrame {
 			final BufferedReader reader = new BufferedReader(new FileReader(dictFile));
 
 			String line = "";
+			// Read the foreword
+			foreword = "";
+			while (reader.ready()) {
+				line = reader.readLine();
+				if (line.startsWith("#"))
+					foreword += line + "\n";
+				else
+					break;
+			}
+			// Read the dictionary (comments are ignored entirely)
 			while (reader.ready()) {
 				line = reader.readLine();
 				if (line == null || line.startsWith("#") || line.trim().equals(""))
