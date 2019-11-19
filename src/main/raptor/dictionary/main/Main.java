@@ -171,9 +171,10 @@ public class Main extends JFrame {
 			}
 			// Read the dictionary (comments are ignored entirely)
 			while (reader.ready()) {
-				line = reader.readLine();
-				if (line == null || line.startsWith("#") || line.trim().equals(""))
+				if (line == null || line.startsWith("#") || line.trim().equals("")) {
+					line = reader.readLine();
 					continue;
+				}
 
 				final String[] split = line.split("\t");
 				final String partOfSpeech = split[1];
@@ -185,6 +186,8 @@ public class Main extends JFrame {
 				final List<String> wordList = wordsByPos.get(partOfSpeech);
 				if (!wordList.contains(word))
 					wordList.add(word);
+
+				line = reader.readLine();
 			}
 
 			reader.close();
