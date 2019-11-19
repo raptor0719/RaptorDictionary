@@ -176,11 +176,15 @@ public class Main extends JFrame {
 					continue;
 
 				final String[] split = line.split("\t");
+				final String partOfSpeech = split[1];
+				final String word = split[0];
 
-				if (wordsByPos.get(split[1]) == null)
-					wordsByPos.put(split[1], new ArrayList<String>());
+				if (wordsByPos.get(partOfSpeech) == null)
+					wordsByPos.put(partOfSpeech, new ArrayList<String>());
 
-				wordsByPos.get(split[1]).add(split[0]);
+				final List<String> wordList = wordsByPos.get(partOfSpeech);
+				if (!wordList.contains(word))
+					wordList.add(word);
 			}
 
 			reader.close();
